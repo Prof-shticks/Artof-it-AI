@@ -2,8 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from modules.LLaMa.LLaMAManager import LLaMAManager
+from api.routers.pdf_router import router as pdf_router
 
 app = FastAPI()
+
+# Include routers
+app.include_router(pdf_router, prefix="/api", tags=["PDF Operations"])
 
 llama_manager  = LLaMAManager(
     model_path="neural_networks/llama-pro-8b-instruct.Q4_K_M.gguf",

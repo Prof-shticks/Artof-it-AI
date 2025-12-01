@@ -4,3 +4,4 @@ __pycache__
 .env
 env
 neural_networks/
+files_txt_view/
