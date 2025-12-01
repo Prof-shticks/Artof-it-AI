@@ -39,8 +39,8 @@ class LLaMAManager:
 
     def generate_response(self,
                           prompt: str,
-                          max_tokens: int = 256,
-                          temperature: float = 0.7,
+                          max_tokens: int = 3072,#2048
+                          temperature: float = 0.4,
                           top_p: float = 0.95,
                           **kwargs) -> Dict:
         try:
