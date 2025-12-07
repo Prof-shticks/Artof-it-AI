@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from modules.LLaMa.LLaMAManager import LLaMAManager
 from api.routers.pdf_router import router as pdf_router
+from api.routers.skill_matcher_router import router as skill_matcher_router
 
 app = FastAPI()
 
@@ -19,16 +20,12 @@ def get_llama_manager() -> LLaMAManager:
 
 # Include routers
 app.include_router(pdf_router, prefix="/api", tags=["PDF Operations"])
+app.include_router(skill_matcher_router, prefix="/api/skill-matcher", tags=["Skill Matcher"])
 
 # Import and include philosophy router after llama_manager is initialized
-from modules.philosophy.philosophy_router import router as philosophy_router, get_llama_manager as philosophy_get_llama_manager
-
-# Override the dependency function in the philosophy router module
-import modules.philosophy.philosophy_router as ph_router_module
-ph_router_module.get_llama_manager = get_llama_manager
-
+from modules.philosophy.philosophy_router import router as philosophy_router
 app.include_router(philosophy_router, prefix="/api/philosophy", tags=["Philosophy Analysis"])
-app.state.llama_manager = llama_manager
+
 
 
 class ChatRequest(BaseModel):

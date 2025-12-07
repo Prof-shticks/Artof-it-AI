@@ -10,7 +10,7 @@ class PDFConverter:
     def __init__(self):
         pass
 
-    def convert_pdf_to_text(self, pdf_file: bytes) -> Optional[Tuple[str, str]]:
+    def convert_pdf_to_text(self, pdf_file: bytes, output_dir: str = "files_txt_view") -> Optional[Tuple[str, str]]:
 
         try:
             pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_file))
@@ -22,7 +22,7 @@ class PDFConverter:
             text_content = text_content.strip()
 
             file_uuid = str(uuid.uuid4())
-            file_path = os.path.join("files_txt_view", f"{file_uuid}.txt")
+            file_path = os.path.join(output_dir, f"{file_uuid}.txt")
 
             # Save text content to file
             with open(file_path, 'w', encoding='utf-8') as f:
